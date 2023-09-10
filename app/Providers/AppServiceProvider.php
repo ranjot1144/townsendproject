@@ -4,6 +4,10 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use App\Contracts\MyInterface;
+use App\Services\MyService;
+
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -12,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         //
+        $this->app->bind(MyInterface::class, MyService::class);
     }
 
     /**

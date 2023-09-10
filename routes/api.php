@@ -20,5 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/products', \App\Http\Controllers\GetProductsController::class);
 
-Route::get('/api/products/{section}', [\App\Http\Controllers\GetProductsController::class, 'indexBySection']);
+Route::get('/prod/list', [\App\Http\Controllers\GetProductsController::class, 'getStoreProductsBySectionWithPaginationAndSorting']);
 

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\GetProductsAction;
+//use App\Actions\GetProductsAction;
+use App\Models\StoreProduct;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\GetProductsRequest;
+
 
 class GetProductsController extends Controller
 {
@@ -20,12 +23,12 @@ class GetProductsController extends Controller
         $this->imagesDomain = "https://img.tmstor.es/";
     }
 
-    public function __invoke()
+    public function __invoke(GetProductsRequest $request)
     {
 
         $number = $request->input('number', null);
         $page = $request->input('page', null);
-        $sort = $request->input('sort', 0);
+        $sort = $request->input('sort', 'position');
         //return $this->getStoreProductsBySectionWithPaginationAndSorting($this->storeId, '%', $_GET['number'] ?? null, $_GET['page'] ?? null, $_GET['sort'] ?? 0);
         return $this->getStoreProductsBySectionWithPaginationAndSorting(
             $this->storeId, 
@@ -36,7 +39,7 @@ class GetProductsController extends Controller
             );
     }
 
-    public function indexBySection(Request $request, $section)
+    public function indexBySection(GetProductsRequest $request, $section)
     {
         // Validate and sanitize the input
         $section = $this->sanitizeSection($section);
